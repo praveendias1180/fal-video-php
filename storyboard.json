@@ -1,0 +1,45 @@
+{
+  "project": "US 30+ fat shred — vertical mobile ad",
+  "model": "fal-ai/kling-video/v2.6/pro/image-to-video",
+  "out_dir": "shots",
+  "default_params": { "duration": 5, "generate_audio": false },
+  "_notes": "Every shot animates the SAME start image (ref.png) so the character stays identical. The motion_prompt directs ACTION + CAMERA only — appearance is locked by the image. 'overlay' is a suggested on-screen text for your editor (not sent to the model).",
+  "shots": [
+    {
+      "id": "01_hook",
+      "image": "ref.png",
+      "motion_prompt": "The man glances down at his midsection with a slight frown, then lifts his head and looks straight at the camera with quiet determination. Slow cinematic push-in.",
+      "overlay": "30+ and the fat won't budge?"
+    },
+    {
+      "id": "02_decision",
+      "image": "ref.png",
+      "motion_prompt": "The man glances at the fitness watch on his wrist, takes a steadying breath, and gives a small confident nod to himself. Gentle handheld, shallow depth of field.",
+      "overlay": "It's not your fault — it's your plan."
+    },
+    {
+      "id": "03_kettlebell",
+      "image": "ref.png",
+      "motion_prompt": "The man grips a kettlebell and performs powerful explosive kettlebell swings, core engaged, sweat forming on his brow. Slow push-in, low hero angle.",
+      "overlay": "Train smarter, not longer."
+    },
+    {
+      "id": "04_curl",
+      "image": "ref.png",
+      "motion_prompt": "The man lifts a dumbbell in a strong, controlled bicep curl, muscles flexing, focused and intense. Tight medium shot, slight orbit.",
+      "overlay": "15 focused minutes a day."
+    },
+    {
+      "id": "05_payoff",
+      "image": "ref.png",
+      "motion_prompt": "The man wipes his forehead with the back of his hand, breathing hard, then breaks into a satisfied confident smile. Warm golden morning light, gentle handheld.",
+      "overlay": "Real results for real life."
+    },
+    {
+      "id": "06_cta",
+      "image": "ref.png",
+      "motion_prompt": "The man crosses his arms over his chest and gives a confident, reassuring nod toward the camera. Slow steady push-in, clean framing with space on the right.",
+      "overlay": "Start your shred today →"
+    }
+  ]
+}

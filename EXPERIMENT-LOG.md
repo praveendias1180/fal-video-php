@@ -82,6 +82,37 @@ the key technique for a multi-shot ad. Workflow: **FLUX (make image) → Kling (
 
 ---
 
+## 3b. Multi-shot storyboard (the assembled ad)
+
+Goal: turn the i2v technique into a full **6-shot vertical ad** for "US 30+ fat shred",
+with one consistent character across every shot.
+
+- **Tooling built:** `batch.php` reads `storyboard.json`, renders each shot, downloads
+  it to `shots/`, and writes `shots/manifest.json` + `shots/concat.txt`.
+- **Consistency strategy:** every shot animates the **same `ref.png`** start frame, so the
+  man's face/shirt/gym stay identical. The `motion_prompt` directs only **action + camera**.
+- **Model:** `fal-ai/kling-video/v2.6/pro/image-to-video`, `duration=5`, `generate_audio=false`.
+- **Output:** 6 × 1080×1920 clips, stitched with ffmpeg into `storyboard.mp4` (30.3s).
+
+| # | Shot id | Motion (action + camera) | Suggested overlay |
+|---|---|---|---|
+| 1 | `01_hook` | glances at midsection → looks up determined; slow push-in | "30+ and the fat won't budge?" |
+| 2 | `02_decision` | checks watch, deep breath, nods; handheld | "It's not your fault — it's your plan." |
+| 3 | `03_kettlebell` | explosive kettlebell swings, sweat; low hero angle | "Train smarter, not longer." |
+| 4 | `04_curl` | strong dumbbell curl; tight shot, slight orbit | "15 focused minutes a day." |
+| 5 | `05_payoff` | wipes brow → confident smile; golden light | "Real results for real life." |
+| 6 | `06_cta` | arms crossed, reassuring nod; push-in | "Start your shred today →" |
+
+Stitch command:
+```
+ffmpeg -f concat -safe 0 -i shots/concat.txt -c:v libx264 -pix_fmt yuv420p storyboard.mp4
+```
+
+**Result:** character consistency held across all 6 shots (verified via `contact_sheet.png`).
+**Limitation noted:** every shot opens on the same frozen pose — fine for a single-location
+gym ad, but multi-*scene* identity (same person in different places/outfits) needs a dedicated
+character/reference model, not just one shared start frame.
+
 ## 4. Key parameters learned
 
 | Param | Used on | Notes |
@@ -105,12 +136,13 @@ Pulled from `php usage.php --start 2026-06-22`:
 | Endpoint | Unit | Qty | Cost |
 |---|---|---|---|
 | `bytedance/seedance-2.0/fast/text-to-video` | 1k tokens | 108.9 | $1.2197 |
-| `fal-ai/kling-video/v2.6/pro/image-to-video` | seconds | 10 | $0.7000 |
+| `fal-ai/kling-video/v2.6/pro/image-to-video` | seconds | 40 | $2.8000 |
 | `fal-ai/ltx-video` | videos | 2 | $0.0400 |
 | `fal-ai/flux/schnell` | megapixels | 1 | $0.0030 |
-| **Total** | | | **$1.9627** |
+| **Total** | | | **$4.0627** |
 
-Starting balance was $8.76 → roughly **$6.80 remaining**.
+(Kling's 40s = 10s from the two i2v demo shots + 30s from the 6-shot storyboard.)
+Starting balance was $8.76 → roughly **$4.70 remaining**.
 
 **Cost intuition gained:** image gen is basically free (~$0.003), Kling i2v without
 audio is cheap (~$0.07/s), Seedance is the pricey one (~$0.24/s with audio bundled in).
@@ -120,10 +152,11 @@ Iterate on cheap models + short durations, spend on the final render.
 
 ## 6. Files produced
 
-- Scaffold/code: `fal.php`, `generate.php`, `image.php`, `usage.php`
+- Scaffold/code: `fal.php`, `generate.php`, `image.php`, `usage.php`, `batch.php`
+- Storyboard def: `storyboard.json`
 - Docs: `README.md`, `MODELS.md`, this log
-- Media (gitignored): `panda.mp4`, `panda_seedance.mp4`, `ref.png`,
-  `shotA_swing.mp4`, `shotB_smile.mp4`, `frameA.png`, `frameB.png`
+- Media: `panda_seedance.mp4`, `ref.png`, `shotA_swing.mp4`, `shotB_smile.mp4`,
+  the 6 `shots/*.mp4`, `storyboard.mp4`, `contact_sheet.png`
 
 ## 7. Next ideas
 - Build a 6–8 shot vertical storyboard reusing one character (FLUX → Kling per shot).

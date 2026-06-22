@@ -1,0 +1,6 @@
+file '01_hook.mp4'
+file '02_decision.mp4'
+file '03_kettlebell.mp4'
+file '04_curl.mp4'
+file '05_payoff.mp4'
+file '06_cta.mp4'

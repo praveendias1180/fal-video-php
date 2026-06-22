@@ -1,0 +1,48 @@
+{
+    "project": "US 30+ fat shred \u2014 vertical mobile ad",
+    "model": "fal-ai/kling-video/v2.6/pro/image-to-video",
+    "shots": [
+        {
+            "id": "01_hook",
+            "file": "shots/01_hook.mp4",
+            "overlay": "30+ and the fat won't budge?",
+            "motion_prompt": "The man glances down at his midsection with a slight frown, then lifts his head and looks straight at the camera with quiet determination. Slow cinematic push-in.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f5138/VhvRwLjy20ijrop5duvAf_output.mp4"
+        },
+        {
+            "id": "02_decision",
+            "file": "shots/02_decision.mp4",
+            "overlay": "It's not your fault \u2014 it's your plan.",
+            "motion_prompt": "The man glances at the fitness watch on his wrist, takes a steadying breath, and gives a small confident nod to himself. Gentle handheld, shallow depth of field.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f5141/tevSy2X2jV5F_VML6_0gQ_output.mp4"
+        },
+        {
+            "id": "03_kettlebell",
+            "file": "shots/03_kettlebell.mp4",
+            "overlay": "Train smarter, not longer.",
+            "motion_prompt": "The man grips a kettlebell and performs powerful explosive kettlebell swings, core engaged, sweat forming on his brow. Slow push-in, low hero angle.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f5150/HpAbHR4W4GTwknTWMUKL__output.mp4"
+        },
+        {
+            "id": "04_curl",
+            "file": "shots/04_curl.mp4",
+            "overlay": "15 focused minutes a day.",
+            "motion_prompt": "The man lifts a dumbbell in a strong, controlled bicep curl, muscles flexing, focused and intense. Tight medium shot, slight orbit.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f5161/eFVa8itp91AARwitG5Lbp_output.mp4"
+        },
+        {
+            "id": "05_payoff",
+            "file": "shots/05_payoff.mp4",
+            "overlay": "Real results for real life.",
+            "motion_prompt": "The man wipes his forehead with the back of his hand, breathing hard, then breaks into a satisfied confident smile. Warm golden morning light, gentle handheld.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f5167/Rk5J00bRXec7ezzcxblJz_output.mp4"
+        },
+        {
+            "id": "06_cta",
+            "file": "shots/06_cta.mp4",
+            "overlay": "Start your shred today \u2192",
+            "motion_prompt": "The man crosses his arms over his chest and gives a confident, reassuring nod toward the camera. Slow steady push-in, clean framing with space on the right.",
+            "source_url": "https://v3b.fal.media/files/b/0a9f516e/qYGlCB0cDaqlgz9X2GbmX_output.mp4"
+        }
+    ]
+}
