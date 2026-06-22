@@ -39,10 +39,22 @@ $opts = [
 ];
 
 $prompt = null;
+$extra  = [];   // model-specific inputs from repeatable --param key=value
 $argv_ = array_slice($argv, 1);
 for ($i = 0; $i < count($argv_); $i++) {
     $a = $argv_[$i];
-    if (str_starts_with($a, '--')) {
+    if ($a === '--param') {
+        // e.g. --param resolution=720p  --param duration=5  --param generate_audio=false
+        $kv = $argv_[++$i] ?? '';
+        [$k, $v] = array_pad(explode('=', $kv, 2), 2, null);
+        if ($k === null || $v === null) {
+            fwrite(STDERR, "Bad --param '{$kv}', expected key=value\n");
+            exit(1);
+        }
+        // JSON-decode so true/false/numbers pass through with the right type.
+        $decoded = json_decode($v, true);
+        $extra[$k] = $decoded === null && strtolower($v) !== 'null' ? $v : $decoded;
+    } elseif (str_starts_with($a, '--')) {
         $name = substr($a, 2);
         if (!array_key_exists($name, $opts)) {
             fwrite(STDERR, "Unknown option: --{$name}\n");
@@ -73,6 +85,9 @@ try {
     } else {
         $model = $opts['model'] ?? DEFAULT_T2V;
     }
+
+    // Merge any model-specific params (resolution, duration, aspect_ratio, seed, ...).
+    $input = array_merge($input, $extra);
 
     fwrite(STDERR, "Model:  {$model}\n");
     fwrite(STDERR, "Prompt: {$prompt}\n");
