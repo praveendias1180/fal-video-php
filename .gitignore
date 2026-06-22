@@ -2,7 +2,6 @@
 .env
 
 # Generated / downloaded media (all video formats)
-*.mp4
 *.mov
 *.webm
 *.mkv
@@ -10,6 +9,5 @@
 *.gif
 
 # Sample images
-*.png
 *.jpg
 *.jpeg
