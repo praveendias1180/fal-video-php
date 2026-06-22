@@ -25,6 +25,7 @@
 
 declare(strict_types=1);
 require __DIR__ . '/fal.php';
+FalClient::loadEnv();   // pick up FAL_KEY from .env if present
 
 // Sensible, currently-available defaults. Override with --model.
 // Verify/browse current model IDs at https://fal.ai/models

@@ -111,6 +111,31 @@ final class FalClient
     }
 
     /**
+     * Load KEY=value pairs from a .env file into the process environment
+     * (without overwriting anything already set). Silently no-ops if absent,
+     * so `export FAL_KEY=...` still works for those who prefer it.
+     */
+    public static function loadEnv(?string $path = null): void
+    {
+        $path = $path ?? __DIR__ . '/.env';
+        if (!is_file($path)) {
+            return;
+        }
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            $line = trim($line);
+            if ($line === '' || str_starts_with($line, '#') || !str_contains($line, '=')) {
+                continue;
+            }
+            [$k, $v] = explode('=', $line, 2);
+            $k = trim($k);
+            $v = trim($v, " \t\"'");
+            if ($k !== '' && getenv($k) === false) {
+                putenv("{$k}={$v}");
+            }
+        }
+    }
+
+    /**
      * Turn a local image file into a data: URI usable as an `image_url`.
      * Handy for image-to-video without uploading to external storage first.
      */
